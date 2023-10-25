@@ -14,11 +14,13 @@ const run = async () => {
     await consumer.subscribe({ topic: "tobechecked", fromBeginning: true });
 
     await consumer.run({
-        eachMessage: async ({ topic, partition, message }) => {
+        eachMessage: async ({ message }) => {
             const fahrenheitTemperature = parseFloat(message.value.toString().replace('°F', ''));
             const celsiusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
 
+
             console.log({
+                fahrenheit: `${fahrenheitTemperature}°F`,
                 offset: message.offset,
                 value: `${celsiusTemperature.toFixed(2)}°C`,
             });
@@ -27,3 +29,4 @@ const run = async () => {
 };
 
 run().catch(console.error);
+

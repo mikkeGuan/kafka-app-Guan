@@ -25,14 +25,13 @@ function randomizeIntegerBetween(from, to) {
 }
 
 async function queueMessage() {
-    const fahrenheitTemperature = randomizeIntegerBetween(0, 100); // Generate a random Fahrenheit temperature
-    const celsiusTemperature = ((fahrenheitTemperature - 32) * 5) / 9; // Convert to Celsius
+    const fahrenheitTemperature = randomizeIntegerBetween(0, 100); 
 
     const success = await producer.send({
         topic: 'tobechecked',
         messages: [
             {
-                value: Buffer.from(`${fahrenheitTemperature}°F`), // Send the temperature as a string
+                value: Buffer.from(`${fahrenheitTemperature}°F`), 
             },
         ],
     });
